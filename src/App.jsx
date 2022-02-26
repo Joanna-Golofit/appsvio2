@@ -21,34 +21,42 @@ function App() {
   const [value1, setValue1] = useState(initialValues.v1);
   const [value2, setValue2] = useState(initialValues.v2);
   const [value3, setValue3] = useState(initialValues.v3);
-  // const [results, setResults] = useState([]);
-  const [counter, setCounter] = useState(1);
+  const [results, setResults] = useState([]);
+  const [counter, setCounter] = useState(0);
 
-  useEffect(() => {
+  const getData = () => {
     fetch("./data/data.json")
-      .then((resp) => resp.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
       .then((data) => {
-        console.log("data", data);
-        // console.log("counter", counter);
-        console.log("data[0]", data[0]);
-        // setResults([...results, data[counter]]);
+        // console.log("data", data);
+        console.log(`data[${counter}]`, data[counter]);
         // console.log("results", results);
-        // console.log("data[counter].v1:", data[counter].v1);
-        setValue1(data[0].v1);
-        setValue2(data[0].v2);
-        setValue3(data[0].v3);
-        // counter++;
-
-        // console.log("counter", counter);
+        setValue1(data[counter].v1);
+        setValue2(data[counter].v2);
+        setValue3(data[counter].v3);
+        setCounter(counter + 1);
+        setResults([...results, value1, value2, value3]);
+        // setResults([...results, v1: value1, v2: value2, v3: value3]);
+        // console.log("results", results)
       })
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    console.log("----------useEffect----------");
+    getData();
   }, []);
 
   const handleInputChange = (e) => {
     console.log("handleInputChange");
     const value = e.target.value;
     const name = e.target.name;
-    console.log(`${name}, ${value}`);
+    console.log(`CHANGED: name: ${name}, value: ${value}, counter: ${counter-1}`);
     if (name === "1") setValue1(value);
     if (name === "2") setValue2(value);
     if (name === "3") setValue3(value);
@@ -70,24 +78,11 @@ function App() {
   // };
 
   const handleCreate = (e) => {
+    console.log("----------handleCreate----------");
     e.preventDefault();
-
-    fetch("./data/data.json")
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log("handleCreate data", data);
-        console.log(`handleCreate data[${counter}]`, data[counter]);
-        // setResults([...results, data[counter]]);
-        // console.log("results", results);
-        // console.log("data[counter].v1:", data[counter].v1);
-        setValue1(data[counter].v1);
-        setValue2(data[counter].v2);
-        setValue3(data[counter].v3);
-        setCounter(counter + 1);
-        // console.log("handleCreate counter po", counter);
-      })
-      .catch((err) => console.log(err));
+    getData();
   };
+
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   setResults([...results, value1, value2, value3]);
