@@ -50,6 +50,7 @@ function App() {
   useEffect(() => {
     console.log("----------useEffect----------");
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = (e) => {
