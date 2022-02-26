@@ -1,0 +1,38 @@
+[
+  {
+    "v1": "Passed",
+    "v2": "Failed",
+    "v3": "Undefined"
+  },
+  {
+    "v1": "Passed",
+    "v2": "Passed",
+    "v3": "Passed"
+  },
+  {
+    "v1": "Failed",
+    "v2": "Failed",
+    "v3": "Failed"
+  },
+  {
+    "v1": "Undefined",
+    "v2": "Undefined",
+    "v3": "Undefined"
+  },
+  {
+    "v1": "Passed",
+    "v2": "Passed",
+    "v3": "Undefined"
+  },
+  {
+    "v1": "Failed",
+    "v2": "Failed",
+    "v3": "Undefined"
+  },
+  {
+    "v1": "Undefined",
+    "v2": "Undefined",
+    "v3": "Undefined"
+  }
+]
+
